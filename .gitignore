@@ -35,4 +35,4 @@ Thumbs.db
 hs_err_pid*
 #Propiedades
 target/classes/db.properties
-src/main/resources/db.properties
+

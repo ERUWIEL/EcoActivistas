@@ -7,9 +7,9 @@ aunque no sea lo recomendable se solicitaba, cambiamos el gitignore para agregar
 
 <br>
 
-cambiamos el script de MySQL para que tenga el campo Problema.descripcion
+### cambiamos el script de MySQL para que tenga el campo Problema.descripcion
 
-´´´ sql 
+```sql
 -- Crear la base de datos
 CREATE DATABASE EcoActivistasDB;
 USE EcoActivistasDB;
@@ -49,10 +49,12 @@ CREATE TABLE Problema_Activista (
     FOREIGN KEY (idProblema) REFERENCES Problema(idProblema),
     FOREIGN KEY (idActivista) REFERENCES Activista(idActivista)
 );
-´´´
+```
 
-NOTA > por lo tanto adaptamos ´src/main/java/com/mycompany/ecoActivistas/model/Problema´
-NOTA > por lo tanto adaptamos ´src/main/java/com/mycompany/ecoActivistas/dao/ProblemaDAO´
+> **Nota**: por lo tanto adaptamos ´src/main/java/com/mycompany/ecoActivistas/model/Problema´
+> **Nota**: por lo tanto adaptamos ´src/main/java/com/mycompany/ecoActivistas/dao/ProblemaDAO´
+
+<br>
 
 completamos los CRUD para Activistas junto con su UI al igual para la relacion N:M Activistas - Problemas
 

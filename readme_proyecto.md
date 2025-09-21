@@ -1,11 +1,11 @@
 # Cambios realizados
 
-<br>
+
 
 agregamos el archivo ´src/main/resources/db.properties´ para la conexion
 aunque no sea lo recomendable se solicitaba, cambiamos el gitignore para agregarlo
 
-<br>
+
 
 ### cambiamos el script de MySQL para que tenga el campo Problema.descripcion
 
@@ -52,6 +52,9 @@ CREATE TABLE Problema_Activista (
 ```
 
 > **Nota**: por lo tanto adaptamos ´src/main/java/com/mycompany/ecoActivistas/model/Problema´
+
+<br>
+
 > **Nota**: por lo tanto adaptamos ´src/main/java/com/mycompany/ecoActivistas/dao/ProblemaDAO´
 
 <br>

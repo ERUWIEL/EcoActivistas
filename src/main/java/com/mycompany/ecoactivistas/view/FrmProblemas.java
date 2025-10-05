@@ -4,6 +4,7 @@
  */
 package com.mycompany.ecoactivistas.view;
 
+import com.mycompany.ecoactivistas.view.components.DlgBuscarClientes;
 import com.mycompany.ecoactivistas.controller.ActivistaController;
 import com.mycompany.ecoactivistas.controller.ClienteController;
 import com.mycompany.ecoactivistas.controller.ProblemaActivistaController;
@@ -70,6 +71,9 @@ public class FrmProblemas extends javax.swing.JPanel {
         btnFiltrar = new javax.swing.JButton();
         txtCliente = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+        setOpaque(false);
+
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblTitulo.setText("Administración de Problemas");
 
@@ -100,6 +104,7 @@ public class FrmProblemas extends javax.swing.JPanel {
         });
 
         btnClientes.setText("Buscar ");
+        btnClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClientesActionPerformed(evt);
@@ -107,6 +112,7 @@ public class FrmProblemas extends javax.swing.JPanel {
         });
 
         btnGuardar.setText("GUARDAR");
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -114,6 +120,7 @@ public class FrmProblemas extends javax.swing.JPanel {
         });
 
         btnCancelar.setText("CANCELAR");
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -131,6 +138,11 @@ public class FrmProblemas extends javax.swing.JPanel {
 
             }
         ));
+        tblProblemas.setDefaultEditor(Object.class, null);
+        tblProblemas.getTableHeader().setReorderingAllowed(false);
+        tblProblemas.setRowHeight(25);
+        tblProblemas.setShowGrid(true);
+        tblProblemas.setGridColor(java.awt.Color.LIGHT_GRAY);
         scrlPanel.setViewportView(tblProblemas);
 
         btnFiltrar.setText("Filtrar por Cliente");

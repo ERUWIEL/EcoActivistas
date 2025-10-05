@@ -53,6 +53,9 @@ public class FrmActivistas extends javax.swing.JPanel {
         lblFchIngreso = new javax.swing.JLabel();
         txtFchIngreso = new com.toedter.calendar.JDateChooser();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+        setOpaque(false);
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Administración de Activistas");
@@ -67,6 +70,7 @@ public class FrmActivistas extends javax.swing.JPanel {
         lblTelefono.setText("TELEFONO");
 
         btnCancelar.setText("CANCELAR");
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -74,6 +78,7 @@ public class FrmActivistas extends javax.swing.JPanel {
         });
 
         btnGuardar.setText("GUARDAR");
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -94,6 +99,11 @@ public class FrmActivistas extends javax.swing.JPanel {
 
             }
         ));
+        tblActivistas.setDefaultEditor(Object.class, null);
+        tblActivistas.getTableHeader().setReorderingAllowed(false);
+        tblActivistas.setRowHeight(25);
+        tblActivistas.setShowGrid(true);
+        tblActivistas.setGridColor(java.awt.Color.LIGHT_GRAY);
         tblActivistas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblActivistasMouseClicked(evt);
@@ -102,6 +112,7 @@ public class FrmActivistas extends javax.swing.JPanel {
         scrlPaneActivistas.setViewportView(tblActivistas);
 
         btnEliminar.setText("ELIMINAR");
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);

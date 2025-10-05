@@ -45,6 +45,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        pnlContenido.setBackground(new java.awt.Color(255, 51, 102));
         pnlContenido.setPreferredSize(new java.awt.Dimension(700, 400));
 
         javax.swing.GroupLayout pnlContenidoLayout = new javax.swing.GroupLayout(pnlContenido);

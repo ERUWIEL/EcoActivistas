@@ -51,6 +51,9 @@ public class FrmClientes extends javax.swing.JPanel {
         tblClientes = new javax.swing.JTable();
         btnEliminar = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+        setOpaque(false);
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("Administración de Clientes");
 
@@ -66,6 +69,7 @@ public class FrmClientes extends javax.swing.JPanel {
         lblTelefono.setText("TELEFONO");
 
         btnCancelar.setText("CANCELAR");
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -73,6 +77,7 @@ public class FrmClientes extends javax.swing.JPanel {
         });
 
         btnGuardar.setText("GUARDAR");
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -98,6 +103,11 @@ public class FrmClientes extends javax.swing.JPanel {
 
             }
         ));
+        tblClientes.setDefaultEditor(Object.class, null);
+        tblClientes.getTableHeader().setReorderingAllowed(false);
+        tblClientes.setRowHeight(25);
+        tblClientes.setShowGrid(true);
+        tblClientes.setGridColor(java.awt.Color.GRAY);
         tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblClientesMouseClicked(evt);
@@ -106,6 +116,7 @@ public class FrmClientes extends javax.swing.JPanel {
         scrlPaneClientes.setViewportView(tblClientes);
 
         btnEliminar.setText("ELIMINAR");
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);

@@ -213,7 +213,18 @@ public class FrmClientes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        limpiarCampos();
+        if (!txtNombre.getText().isEmpty() || !txtDireccion.getText().isEmpty() || !txtTelefono.getText().isEmpty()) {
+            int confirm = JOptionPane.showConfirmDialog(this,
+                    "¿Seguro que quieres descartar los cambios?",
+                    "Confirmar cancelacion",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                limpiarCampos();
+            }
+        } else {
+            limpiarCampos();
+        }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
@@ -259,6 +270,17 @@ public class FrmClientes extends javax.swing.JPanel {
                 );
                 return;
             }
+            
+            if (!nombre.matches("[a-zA-Z\\s]+")) {
+                JOptionPane.showMessageDialog(this, "El nombre solo debe contener letras y espacios.", "Formato Invalido", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            if (!telefono.matches("\\d{10}")) {
+                JOptionPane.showMessageDialog(this, "El telefono debe contener exactamente 10 numeros.", "Formato Invalido", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             if (btnGuardar.getText().equals("GUARDAR")) {
                 // 3. Mandar al controlador para guardar
                 boolean exito = clController.agregarCliente(nombre, direccion, telefono);

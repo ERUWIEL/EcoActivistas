@@ -11,6 +11,7 @@ import com.mycompany.ecoactivistas.controller.ProblemaActivistaController;
 import com.mycompany.ecoactivistas.controller.ProblemaController;
 import com.mycompany.ecoactivistas.model.Activista;
 import com.mycompany.ecoactivistas.model.Cliente;
+import com.mycompany.ecoactivistas.model.Problema;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -328,13 +329,13 @@ public class FrmProblemas extends javax.swing.JPanel {
             Date fechaInicio = (Date) txtFchInicio.getDate();
             Date fechaFin = (Date) txtFchFin.getDate();
 
-            if (descripcion.isEmpty() || fechaFin == null || fechaInicio == null || this.cliente == null) {
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Todos los campos son obligatorios.",
-                        "Error",
-                        JOptionPane.WARNING_MESSAGE
-                );
+            if (descripcion.isEmpty() || fechaInicio == null || this.cliente == null) {
+                JOptionPane.showMessageDialog(this, "Descripcion, Fecha de Inicio y Cliente son obligatorios.", "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            if (fechaFin != null && fechaFin.before(fechaInicio)) {
+                JOptionPane.showMessageDialog(this, "La fecha de fin no puede ser anterior a la fecha de inicio.", "Error de Fechas", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
@@ -402,14 +403,24 @@ public class FrmProblemas extends javax.swing.JPanel {
     private void cargarDatos() {
         int fila = tblProblemas.getSelectedRow();
         if (fila >= 0) {
-            String id = tblProblemas.getValueAt(fila, 0).toString();
-            txtID.setText(id);
-            txtDesc.setText(tblProblemas.getValueAt(fila, 1).toString());
-            cmbEstado.setSelectedItem(tblProblemas.getValueAt(fila, 2));
-            txtFchInicio.setDate((Date) tblProblemas.getValueAt(fila, 3));
-            txtFchFin.setDate((Date) tblProblemas.getValueAt(fila, 4));
-            this.cliente = clController.obtenerCliente(Integer.parseInt(id));
-            txtCliente.setText(this.cliente.getNombre());
+            int idProblema = Integer.parseInt(tblProblemas.getValueAt(fila, 0).toString());
+            Problema problemaSeleccionado = pController.obtenerProblema(idProblema);
+            if (problemaSeleccionado == null) {
+                return;
+            }
+            this.cliente = clController.obtenerCliente(problemaSeleccionado.getIdCliente());
+            txtID.setText(String.valueOf(problemaSeleccionado.getIdProblema()));
+            txtDesc.setText(problemaSeleccionado.getDescripcion());
+            cmbEstado.setSelectedItem(problemaSeleccionado.getEstado());
+            txtFchInicio.setDate(problemaSeleccionado.getFchIni());
+            txtFchFin.setDate(problemaSeleccionado.getFchFin());
+
+            if (this.cliente != null) {
+                txtCliente.setText(this.cliente.getNombre());
+            } else {
+                txtCliente.setText("Cliente no encontrado");
+            }
+
             btnGuardar.setText("ACTUALIZAR");
         }
     }

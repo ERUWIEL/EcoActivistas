@@ -8,6 +8,7 @@ import com.mycompany.ecoactivistas.dao.ProblemaActivistaDAO;
 import com.mycompany.ecoactivistas.interfaces.IProblemaActivistaDAO;
 import com.mycompany.ecoactivistas.model.ProblemaActivista;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -60,5 +61,36 @@ public class ProblemaActivistaController {
             return false;
         }
         return paDAO.eliminar(idProblema, idActivista);
+    }
+    
+    
+    public DefaultTableModel obtenerTablaProblemasActivistas() {
+        String[] columnas = {"ID", "PROBLEMA", "ACTIVISTA"};
+        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+        List<ProblemaActivista> lista = paDAO.obtenerTodos();
+        for (ProblemaActivista pa : lista) {
+            modelo.addRow(new Object[]{pa.getIdProblema(), pa.getIdActivista()});
+        }
+        return modelo;
+    }
+    
+    public DefaultTableModel obtenerTablaProblemasActivistasPorFiltro(String filtro) {
+        String[] columnas = {"ID", "PROBLEMA", "ACTIVISTA"};
+        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+        List<ProblemaActivista> lista = paDAO.obtenerTodosPorFiltro(filtro);
+        for (ProblemaActivista pa : lista) {
+            modelo.addRow(new Object[]{pa.getIdProblema(), pa.getIdActivista()});
+        }
+        return modelo;
+    }
+    
+    public DefaultTableModel obtenerTablaProblemasActivistasPorFiltroModal(String filtro) {
+        String[] columnas = {"ID", "PROBLEMA", "ACTIVISTA"};
+        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+        List<ProblemaActivista> lista = paDAO.obtenerTodosPorFiltroModal(filtro);
+        for (ProblemaActivista pa : lista) {
+            modelo.addRow(new Object[]{pa.getIdProblema(), pa.getIdActivista()});
+        }
+        return modelo;
     }
 }

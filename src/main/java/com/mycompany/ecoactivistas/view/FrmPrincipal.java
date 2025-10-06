@@ -25,6 +25,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlContenido.add(new FrmClientes(), "clientes");
         pnlContenido.add(new FrmActivistas(), "activistas");
         pnlContenido.add(new FrmProblemas(), "problemas");
+        pnlContenido.add(new FrmProblemasActivistas(), "problemas_activistas");
     }
 
     /**
@@ -42,6 +43,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         menuClientes = new javax.swing.JMenuItem();
         menuActivistas = new javax.swing.JMenuItem();
         menuProblemas = new javax.swing.JMenuItem();
+        menuProblemasActivistas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,6 +87,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         menuBar.add(menuProblemas);
 
+        menuProblemasActivistas.setText("Problemas Activistas");
+        menuProblemasActivistas.setToolTipText("");
+        menuProblemasActivistas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuProblemasActivistasActionPerformed(evt);
+            }
+        });
+        menuBar.add(menuProblemasActivistas);
+
         jMenuBar1.add(menuBar);
 
         setJMenuBar(jMenuBar1);
@@ -103,20 +114,41 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * metodo para mostrar CRUD clientes
+     * @param evt 
+     */
     private void menuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuClientesActionPerformed
         CardLayout cl = (CardLayout) pnlContenido.getLayout();
         cl.show(pnlContenido, "clientes");
     }//GEN-LAST:event_menuClientesActionPerformed
 
+    /**
+     * metodo para mostrar CRUD actiivstas
+     * @param evt 
+     */
     private void menuActivistasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActivistasActionPerformed
         CardLayout cl = (CardLayout) pnlContenido.getLayout();
         cl.show(pnlContenido, "activistas");
     }//GEN-LAST:event_menuActivistasActionPerformed
 
+    /**
+     * metodo para mostrar CRUD problemas
+     * @param evt 
+     */
     private void menuProblemasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuProblemasActionPerformed
         CardLayout cl = (CardLayout) pnlContenido.getLayout();
         cl.show(pnlContenido, "problemas");
     }//GEN-LAST:event_menuProblemasActionPerformed
+
+    /**
+     * metodo para mostrar CRUD problemas - activistas
+     * @param evt 
+     */
+    private void menuProblemasActivistasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuProblemasActivistasActionPerformed
+        CardLayout cl = (CardLayout) pnlContenido.getLayout();
+        cl.show(pnlContenido, "problemas_activistas");
+    }//GEN-LAST:event_menuProblemasActivistasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,6 +181,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuBar;
     private javax.swing.JMenuItem menuClientes;
     private javax.swing.JMenuItem menuProblemas;
+    private javax.swing.JMenuItem menuProblemasActivistas;
     private javax.swing.JPanel pnlContenido;
     // End of variables declaration//GEN-END:variables
 }

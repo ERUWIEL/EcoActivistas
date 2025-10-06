@@ -16,6 +16,9 @@ public interface IProblemaActivistaDAO {
     List<ProblemaActivista> obtenerPorProblema(int idProblema);
     List<ProblemaActivista> obtenerPorActivista(int idActivista);
     boolean eliminar(int idProblema, int idActivista);
+    List<ProblemaActivista> obtenerTodos();
+    List<ProblemaActivista> obtenerTodosPorFiltro(String filtro);
+    List<ProblemaActivista> obtenerTodosPorFiltroModal(String filtro);
 }
 
 

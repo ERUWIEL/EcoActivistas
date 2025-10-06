@@ -23,8 +23,7 @@ public class ProblemaActivistaDAO implements IProblemaActivistaDAO {
     @Override
     public boolean insertar(ProblemaActivista relacion) {
         String sql = "INSERT INTO Problema_Activista (idProblema, idActivista) VALUES (?, ?)";
-        try (Connection conn = ConexionDB.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = ConexionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, relacion.getIdProblema());
             ps.setInt(2, relacion.getIdActivista());
@@ -42,8 +41,7 @@ public class ProblemaActivistaDAO implements IProblemaActivistaDAO {
         String sql = "SELECT idProblema, idActivista FROM Problema_Activista WHERE idProblema = ? LIMIT 100";
         List<ProblemaActivista> lista = new ArrayList<>();
 
-        try (Connection conn = ConexionDB.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = ConexionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, idProblema);
             ResultSet rs = ps.executeQuery();
@@ -66,8 +64,7 @@ public class ProblemaActivistaDAO implements IProblemaActivistaDAO {
         String sql = "SELECT idProblema,idActivista  FROM Problema_Activista WHERE idActivista = ? LIMIT 100";
         List<ProblemaActivista> lista = new ArrayList<>();
 
-        try (Connection conn = ConexionDB.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = ConexionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, idActivista);
             ResultSet rs = ps.executeQuery();
@@ -88,8 +85,7 @@ public class ProblemaActivistaDAO implements IProblemaActivistaDAO {
     @Override
     public boolean eliminar(int idProblema, int idActivista) {
         String sql = "DELETE FROM Problema_Activista WHERE idProblema = ? AND idActivista = ?";
-        try (Connection conn = ConexionDB.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = ConexionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, idProblema);
             ps.setInt(2, idActivista);
@@ -101,4 +97,65 @@ public class ProblemaActivistaDAO implements IProblemaActivistaDAO {
             return false;
         }
     }
+    
+    @Override
+    public List<ProblemaActivista> obtenerTodos() {
+        String sql = "SELECT idProblema, idActivista FROM Problema_Activista LIMIT 100";
+        List<ProblemaActivista> lista = new ArrayList<>();
+
+        try (Connection conn = ConexionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                ProblemaActivista problemaActivista = new ProblemaActivista();
+                problemaActivista.setIdProblema(rs.getInt("idProblema"));
+                problemaActivista.setIdActivista(rs.getInt("idActivista"));
+                lista.add(problemaActivista);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al obtener todos los problemaActivista: " + e.getMessage());
+        }
+        return lista;
+    }
+
+    @Override
+    public List<ProblemaActivista> obtenerTodosPorFiltro(String filtro) {
+        String sql = "SELECT idProblema, idActivista FROM Problema_Activista WHERE idProblema LIKE ? LIMIT 100";
+        List<ProblemaActivista> lista = new ArrayList<>();
+
+        try (Connection conn = ConexionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                ProblemaActivista problemaActivista = new ProblemaActivista();
+                problemaActivista.setIdProblema(rs.getInt("idProblema"));
+                problemaActivista.setIdActivista(rs.getInt("idActivista"));
+                lista.add(problemaActivista);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al obtener todos los problemaActivista: " + e.getMessage());
+        }
+        return lista;
+    }
+
+    @Override
+    public List<ProblemaActivista> obtenerTodosPorFiltroModal(String filtro) {
+        String sql = "SELECT idProblema, idActivista FROM Problema_Activista WHERE idProblema LIKE ? OR idActivista LIKE ? LIMIT 100";
+        List<ProblemaActivista> lista = new ArrayList<>();
+
+        try (Connection conn = ConexionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                ProblemaActivista problemaActivista = new ProblemaActivista();
+                problemaActivista.setIdProblema(rs.getInt("idProblema"));
+                problemaActivista.setIdActivista(rs.getInt("idActivista"));
+                lista.add(problemaActivista);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al obtener todos los problemaActivista: " + e.getMessage());
+        }
+        return lista;
+    }
+
 }

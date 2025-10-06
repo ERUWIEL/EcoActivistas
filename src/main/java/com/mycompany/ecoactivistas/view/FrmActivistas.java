@@ -211,7 +211,18 @@ public class FrmActivistas extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        if (!txtNombre.getText().isEmpty() || !txtTelefono.getText().isEmpty()) {
+        int confirm = JOptionPane.showConfirmDialog(this,
+                "¿Seguro que quieres descartar los cambios?",
+                "Confirmar cancelacion",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            limpiarCampos();
+        }
+    } else {
         limpiarCampos();
+    }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
@@ -243,61 +254,57 @@ public class FrmActivistas extends javax.swing.JPanel {
 
     private void guardarActivista() {
         try {
-            // 1. Tomar datos de los campos
             String nombre = txtNombre.getText().trim();
             String telefono = txtTelefono.getText().trim();
-            Date fchIngreso = (Date) txtFchIngreso.getDate();
-            
-            if (nombre.isEmpty() || telefono.isEmpty()) {
+            java.util.Date fchIngreso = txtFchIngreso.getDate();
+
+            if (nombre.isEmpty() || telefono.isEmpty() || fchIngreso == null) {
                 JOptionPane.showMessageDialog(
                         this,
-                        "Todos los campos son obligatorios.",
-                        "Error",
+                        "Todos los campos (Nombre, Telefono y Fecha) son obligatorios.",
+                        "Campos Incompletos",
                         JOptionPane.WARNING_MESSAGE
                 );
                 return;
             }
-            java.sql.Date sqlDateIngreso = new java.sql.Date(fchIngreso.getTime());
-            
-            if (btnGuardar.getText().equals("GUARDAR")) {
-                // 3. Mandar al controlador para guardar
-                boolean exito = actController.agregarActivista(nombre, telefono, sqlDateIngreso);
 
-                // 4. Verificar resultado
+            if (!telefono.matches("\\d{10}")) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "El telefono debe contener exactamente 10 numeros (0-9).",
+                        "Formato Invalido",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+
+            java.sql.Date sqlDateIngreso = new java.sql.Date(fchIngreso.getTime());
+
+            if (btnGuardar.getText().equals("GUARDAR")) {
+                boolean exito = actController.agregarActivista(nombre, telefono, sqlDateIngreso);
                 if (exito) {
                     JOptionPane.showMessageDialog(this, "Activista guardado correctamente.");
                 } else {
-                    JOptionPane.showMessageDialog(
-                            this,
-                            "Ocurrio un error al guardar el activista",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE
-                    );
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar el activista", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                // ACTUALIZAR
                 int id = Integer.parseInt(txtID.getText());
-
                 boolean exito = actController.actualizarActivista(id, nombre, telefono, sqlDateIngreso);
                 if (exito) {
                     JOptionPane.showMessageDialog(this, "Activista actualizado correctamente.");
                 } else {
-                    JOptionPane.showMessageDialog(
-                            this,
-                            "Ocurrio un error al actualizar los datos del activista.",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE
-                    );
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error al actualizar los datos del activista.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
-            cargarActivistas();   // refrescar tabla
-            limpiarCampos();    // limpiar campos de texto
-        } catch (HeadlessException | NumberFormatException e) {
+            cargarActivistas();
+            limpiarCampos();
+
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(
                     this,
-                    "Error: " + e.getMessage(),
-                    "Error",
+                    "Ocurrio un error inesperado: " + e.getMessage(),
+                    "Error Critico",
                     JOptionPane.ERROR_MESSAGE
             );
         }
